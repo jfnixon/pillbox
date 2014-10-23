@@ -1,0 +1,9 @@
+%h1 Create a New Prescription
+
+= simple_form_for @prescription do |f|
+  = f.input :drug_name
+  = f.input :fill_date
+  = f.input :dose_count
+  = f.input :description
+  = f.input :instructions
+  = f.submit
