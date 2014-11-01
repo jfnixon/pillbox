@@ -1,0 +1,20 @@
+#calendar{:style => 'margin:1em 0;'}
+    
+- content_for :last_javascripts do
+  :javascript
+      $('#calendar').fullCalendar({
+        eventSources: [
+          // your event source
+          {
+              url: '/event_instances.json',
+              data: {
+                  custom_param1: 'something',
+                  custom_param2: 'somethingelse'
+              },
+              error: function() {
+                  alert('there was an error while fetching events!');
+              }
+          }
+          // any other sources...
+        ]
+      });

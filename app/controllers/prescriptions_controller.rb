@@ -1,10 +1,10 @@
 class PrescriptionsController < ApplicationController
   def new
-    @prescription = current_user.prescriptions.new
+    @prescription = Prescription.new
   end
 
   def create 
-    @prescription = current_user.prescriptions.new prescription_params
+    @prescription = Prescription.new prescription_params.merge({user: current_user})
     if @prescription.save
       redirect_to root_path
     else

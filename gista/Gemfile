@@ -1,0 +1,3 @@
+# Add these two gems
+gem 'ice_cube',                     '0.9.3'
+gem 'squeel',                       '1.0.16'
