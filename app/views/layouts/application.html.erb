@@ -10,5 +10,8 @@
 
 <%= yield %>
 
+<% if content_for? :last_javascripts %>
+  <%= yield :last_javascripts %>
+<% end %>
 </body>
 </html>

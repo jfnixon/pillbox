@@ -11,21 +11,21 @@
     .span6
       = f.check_box :is_all_day
       = f.date_select :from_date, {}, {style: 'width:auto;'}
-      .event_time
+      .prescription_time
         = f.time_select :from_time, {:minute_step => 15}, {style: 'width:auto;'}
       = f.date_select :to_date, {}, {style: 'width:auto;'}
-      .event_time
+      .prescription_time
         = f.time_select :to_time, {:minute_step => 15}, {style: 'width:auto;'}
-      .event_time
+      .prescription_time
         = f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones, :default => "Central Time (US & Canada)"
       = f.select :repeats, Prescription::RepeatsOptions
       = render partial: 'repeats_daily_options', locals: {f: f}
       = render partial: 'repeats_weekly_options', locals: {f: f}
       = render partial: 'repeats_monthly_options', locals: {f: f}
       = render partial: 'repeats_yearly_options', locals: {f: f}
-      #repeats_options.event_option
+      #repeats_options.prescription_option
         = f.select :repeat_ends, Prescription::RepeatEndsOptions
-        #event_repeat_ends_on
+        #prescription_repeat_ends_on
           = f.date_select :repeat_ends_on, {}, {style: 'width:auto;'}
   .form-actions
     = f.submit 'Save'
@@ -33,91 +33,91 @@
 - content_for :last_javascripts do
   :javascript
     $(function() {
-      var toggle_repeats_yearly_on = function(){
-        if($('#event_repeats_yearly_on').is(':checked')){
-          $('#event_repeats_yearly_on_options').show();
+      var toggle_repeats_yearly_on = function() {
+        if($('#prescription_repeats_yearly_on').is(':checked')) {
+          $('#prescription_repeats_yearly_on_options').show();
         } else {
-          $('#event_repeats_yearly_on_options').hide();
+          $('#prescription_repeats_yearly_on_options').hide();
         }
       }
-    toggle_repeats_yearly_on();
-    $('#event_repeats_yearly_on').on('change',function(){
       toggle_repeats_yearly_on();
+      $('#prescription_repeats_yearly_on').on('change',function() {
+        toggle_repeats_yearly_on();
       });
-    var toggle_event_times = function(){
-    if($('#event_is_all_day').is(':checked')){
-        $('.event_time').hide();
-      } else {
-        $('.event_time').show();
+      var toggle_prescription_times = function() {
+        if($('#prescription_is_all_day').is(':checked')){
+          $('.prescription_time').hide();
+        } else {
+          $('.prescription_time').show();
+        }
       }
-    }
-    toggle_event_times();
-    $('#event_is_all_day').on('change',function(){
-    toggle_event_times();
+      toggle_prescription_times();
+      $('#prescription_is_all_day').on('change',function() {
+        toggle_prescription_times();
+      });
+      var toggle_prescription_options = function() {
+        $('.prescription_option').hide();
+        switch ($('#prescription_repeats').val())
+        {
+          case 'never':
+            // Nothing
+          break;
+          case 'daily':
+            $('#repeats_options').show();
+            $('#repeats_daily_options').show();
+          break;
+          case 'weekly':
+            $('#repeats_options').show();
+            $('#repeats_weekly_options').show();
+          break;
+          case 'monthly':
+            $('#repeats_options').show();
+            $('#repeats_monthly_options').show();
+          break;
+          case 'yearly':
+            $('#repeats_options').show();
+            $('#repeats_yearly_options').show();
+          break;
+        }
+      }
+      toggle_prescription_options();
+      $('#prescription_repeats').on('change',function(){
+        toggle_prescription_options();
+      });
+      var toggle_repeat_ends_on = function(){
+        switch ($('#prescription_repeat_ends').val())
+        {
+          case 'never':
+            $('#prescription_repeat_ends_on').hide();
+          break;
+          case 'on':
+            $('#prescription_repeat_ends_on').show();
+          break;
+        }
+      }
+      toggle_repeat_ends_on();
+      $('#prescription_repeat_ends').on('change',function(){
+        toggle_repeat_ends_on();
+      });
+      var toggle_repeats_monthly = function(){
+        switch ($('#prescription_repeats_monthly').val())
+        {
+          case 'each':
+            $('#prescription_repeats_monthly_each').show();
+            $('#prescription_repeats_monthly_on').hide();
+          break;
+          case 'on':
+            $('#prescription_repeats_monthly_each').hide();
+            $('#prescription_repeats_monthly_on').show();
+          break;
+        }
+      }
+      toggle_repeats_monthly();
+      $('#prescription_repeats_monthly').on('change',function(){
+        toggle_repeats_monthly();
+        });
     });
-    var toggle_event_options = function(){
-    $('.event_option').hide();
-    switch ($('#event_repeats').val())
-    {
-    case 'never':
-      // Nothing
-    break;
-    case 'daily':
-    $('#repeats_options').show();
-    $('#repeats_daily_options').show();
-    break;
-    case 'weekly':
-    $('#repeats_options').show();
-    $('#repeats_weekly_options').show();
-    break;
-    case 'monthly':
-    $('#repeats_options').show();
-    $('#repeats_monthly_options').show();
-    break;
-    case 'yearly':
-    $('#repeats_options').show();
-    $('#repeats_yearly_options').show();
-    break;
-    }
-    }
-    toggle_event_options();
-    $('#event_repeats').on('change',function(){
-    toggle_event_options();
-    });
-    var toggle_repeat_ends_on = function(){
-    switch ($('#event_repeat_ends').val())
-    {
-    case 'never':
-    $('#event_repeat_ends_on').hide();
-    break;
-    case 'on':
-    $('#event_repeat_ends_on').show();
-    break;
-    }
-    }
-    toggle_repeat_ends_on();
-    $('#event_repeat_ends').on('change',function(){
-    toggle_repeat_ends_on();
-    });
-    var toggle_repeats_monthly = function(){
-    switch ($('#event_repeats_monthly').val())
-    {
-    case 'each':
-    $('#event_repeats_monthly_each').show();
-    $('#event_repeats_monthly_on').hide();
-    break;
-    case 'on':
-    $('#event_repeats_monthly_each').hide();
-    $('#event_repeats_monthly_on').show();
-    break;
-    }
-    }
-    toggle_repeats_monthly();
-    $('#event_repeats_monthly').on('change',function(){
-    toggle_repeats_monthly();
-    });
-    });
- 
+
 - content_for :first_styles do
   :css
     #repeats_options {display:none;}
