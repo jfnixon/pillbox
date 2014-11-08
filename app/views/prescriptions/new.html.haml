@@ -1,3 +1,13 @@
+- content_for :first_styles do
+  :css
+    #repeats_options {display:none;}
+    #repeats_daily_options {display:none;}
+    #repeats_weekly_options {display:none;}
+    #repeats_monthly_options {display:none;}
+    #repeats_yearly_options {display:none;}
+
+=yield :first_styles
+
 %h1 Create a New Prescription
 
 = bootstrap_form_for @prescription, html: {class: 'form-horizontal', novalidate: 'novalidate'} do |f|
@@ -41,9 +51,11 @@
         }
       }
       toggle_repeats_yearly_on();
+
       $('#prescription_repeats_yearly_on').on('change',function() {
         toggle_repeats_yearly_on();
       });
+
       var toggle_prescription_times = function() {
         if($('#prescription_is_all_day').is(':checked')){
           $('.prescription_time').hide();
@@ -52,9 +64,11 @@
         }
       }
       toggle_prescription_times();
+
       $('#prescription_is_all_day').on('change',function() {
         toggle_prescription_times();
       });
+
       var toggle_prescription_options = function() {
         $('.prescription_option').hide();
         switch ($('#prescription_repeats').val())
@@ -81,10 +95,12 @@
         }
       }
       toggle_prescription_options();
-      $('#prescription_repeats').on('change',function(){
+
+      $('#prescription_repeats').on('change',function() {
         toggle_prescription_options();
       });
-      var toggle_repeat_ends_on = function(){
+
+      var toggle_repeat_ends_on = function() {
         switch ($('#prescription_repeat_ends').val())
         {
           case 'never':
@@ -96,10 +112,12 @@
         }
       }
       toggle_repeat_ends_on();
-      $('#prescription_repeat_ends').on('change',function(){
+
+      $('#prescription_repeat_ends').on('change',function() {
         toggle_repeat_ends_on();
       });
-      var toggle_repeats_monthly = function(){
+
+      var toggle_repeats_monthly = function() {
         switch ($('#prescription_repeats_monthly').val())
         {
           case 'each':
@@ -113,7 +131,8 @@
         }
       }
       toggle_repeats_monthly();
-      $('#prescription_repeats_monthly').on('change',function(){
+
+      $('#prescription_repeats_monthly').on('change',function() {
         toggle_repeats_monthly();
         });
     });
