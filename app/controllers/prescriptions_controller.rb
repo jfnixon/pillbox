@@ -1,4 +1,8 @@
 class PrescriptionsController < ApplicationController
+  def index
+    @prescriptions = Prescription.all
+  end
+
   def new
     @prescription = Prescription.new
   end

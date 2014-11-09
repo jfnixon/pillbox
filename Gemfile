@@ -43,3 +43,19 @@ gem 'haml'
 gem 'bootstrap_form'
 gem 'ice_cube'
 gem 'squeel'
+gem 'rabl'
+
+group :test do
+  gem 'factory_girl_rails'
+  gem 'capybara-webkit'
+  gem 'selenium-webdriver'
+  gem 'shoulda-matchers', require: false
+  gem "shoulda-callback-matchers", "~> 1.0"
+  gem "rspec-its"
+end
+
+group :development, :test do
+  gem 'rspec-rails'
+  gem 'pry'
+  # gem 'debugger'
+end

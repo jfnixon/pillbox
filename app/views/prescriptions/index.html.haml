@@ -1,0 +1,14 @@
+%h1 Prescriptions
+
+%table
+  %thead
+    %th Drug Name
+    %th Dose
+  %tbody
+    - @prescriptions.each do |prescription|
+      %tr
+        %td 
+          = prescription.drug_name
+        %td
+          = prescription.dose_count
+

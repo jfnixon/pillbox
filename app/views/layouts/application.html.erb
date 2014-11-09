@@ -4,10 +4,18 @@
   <title>Pillbox</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.6.0/moment.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.0.0/fullcalendar.js"></script>
+<link href="http://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.0.0/fullcalendar.css" rel="stylesheet"></link>
+<link href="http://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.0.0/fullcalendar.print.css" media="print" rel="stylesheet"></link>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
+  <% if current_user %>
+    <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
+  <% end %>
 <%= yield %>
 
 <% if content_for? :last_javascripts %>
