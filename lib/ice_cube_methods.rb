@@ -95,6 +95,7 @@ module IceCubeMethods
     if is_all_day
       ActiveSupport::TimeZone[time_zone].parse(from_date.to_datetime.strftime('%Y-%m-%d')).beginning_of_day
     else
+      binding.pry
       ActiveSupport::TimeZone[time_zone].parse(from_date.to_datetime.strftime('%Y-%m-%d')).beginning_of_day + from_time.seconds_since_midnight
     end
   end

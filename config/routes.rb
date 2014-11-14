@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   root 'home#index'
   resources :prescriptions
   resources :prescription_instances, only: :index
+  resources :time_blocks
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

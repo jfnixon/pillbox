@@ -1,0 +1,5 @@
+= form_for @time_block do |f|
+  = f.text_field :name
+  = f.time_select :start_time
+  = f.time_select :end_time
+  = f.submit

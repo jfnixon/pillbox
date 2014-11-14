@@ -34,6 +34,7 @@ class PrescriptionInstance
         (from_date <= end_date)
       )  
     }
+
     results.map { |prescription| 
       prescription.schedule.occurrences_between(begin_date,end_date).map { |date|
         i = PrescriptionInstance.new()

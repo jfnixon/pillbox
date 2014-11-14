@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141030162513) do
+ActiveRecord::Schema.define(version: 20141113191836) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,6 +47,16 @@ ActiveRecord::Schema.define(version: 20141030162513) do
     t.string   "repeat_ends"
     t.date     "repeat_ends_on"
     t.string   "time_zone"
+    t.integer  "time_block_id"
+  end
+
+  create_table "time_blocks", force: true do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.time     "start_time"
+    t.time     "end_time"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", force: true do |t|

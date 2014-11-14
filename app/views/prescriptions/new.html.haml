@@ -19,13 +19,8 @@
       = f.date_select :fill_date, class: 'span4'
       = f.number_field :dose_count
     .span6
-      = f.check_box :is_all_day
+      = f.select :time_block_id, options_for_select(current_user.time_blocks.map {|b| [b.name, b.id]})
       = f.date_select :from_date, {}, {style: 'width:auto;'}
-      .prescription_time
-        = f.time_select :from_time, {:minute_step => 15}, {style: 'width:auto;'}
-      = f.date_select :to_date, {}, {style: 'width:auto;'}
-      .prescription_time
-        = f.time_select :to_time, {:minute_step => 15}, {style: 'width:auto;'}
       .prescription_time
         = f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones, :default => "Central Time (US & Canada)"
       = f.select :repeats, Prescription::RepeatsOptions
